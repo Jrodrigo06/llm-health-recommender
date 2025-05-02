@@ -3,3 +3,4 @@ import os
 
 load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
+TESTING =os.getenv("TESTING")

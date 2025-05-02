@@ -27,4 +27,5 @@ async def predict(data: UserRequest):
 # Route to get user history
 @router.get("/history/{user_id}")
 async def get_history(user_id: int):
+    print("Fetching history for user_id:", user_id)
     return {"history": get_user_history(user_id)}
