@@ -35,7 +35,7 @@ class TestDummyRoutes(unittest.TestCase):
 
         response = client.post("/predict", json=user_request.model_dump())
 
-        self.assertEqual(response.json(), {"message": "Dummy response"})
+        self.assertEqual(response.json(), {"message": "Dummy response from LLM"})
 
 
 if __name__ == "__main__":
