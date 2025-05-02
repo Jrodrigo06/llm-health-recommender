@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 from app.models.schema import UserRequest
 from app.services.llm_service import get_response_from_llm, format_prompt
-from app.services.mongo_service import log_prediction
+from app.services.mongo_service import log_prediction, get_user_history
+
 
 router = APIRouter()
 
@@ -26,4 +27,4 @@ async def predict(data: UserRequest):
 # Route to get user history
 @router.get("/history/{user_id}")
 async def get_history(user_id: int):
-    return {"message": "Dummy response"}
+    return {"history": get_user_history(user_id)}

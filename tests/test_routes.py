@@ -33,9 +33,14 @@ class TestDummyRoutes(unittest.TestCase):
             question="Is my BMI normal?"
         )
 
-        response = client.post("/predict", json=user_request.model_dump())
+        response2 = client.post("/predict", json=user_request.model_dump())
 
-        self.assertEqual(response.json(), {"message": "Dummy response from LLM"})
+        self.assertEqual(response2.json(), {"recommendation": "Dummy response from LLM"})
+
+    def test_history_route(self):
+        # Assuming the user_id is 1 and we want to check the history for this user
+        response3 = client.get("/history/1")
+        self.assertEqual(response3.json(), {"history": []})
 
 
 if __name__ == "__main__":
