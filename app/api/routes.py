@@ -1,11 +1,12 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
+from app.models.schema import UserRequest
 
-app = FastAPI()
+router = APIRouter()
 
-@app.get("/")
+@router.get("/")
 async def root():
     return {"message": "HomePage"}
 
-@app.get("/predict")
-async def predict(data: userInfo_and_question):
-    return {"message": "Predict"}
+@router.post("/predict")
+async def predict(data: UserRequest):
+    return {"message": "Dummy response"}

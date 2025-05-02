@@ -1,0 +1,21 @@
+from pydantic import BaseModel
+
+class UserInfo(BaseModel):
+    name: str
+    email: str
+    age: int
+    bmi: float
+    height: float
+    weight: float
+    diabetes: bool
+    overweight: bool
+    heart_disease: bool
+    family_history: str
+    smoking: bool
+    alcohol: bool
+
+class UserRequest(BaseModel):
+    user_id: int
+    user_info: UserInfo
+    question: str
+

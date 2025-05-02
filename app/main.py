@@ -1,21 +1,5 @@
-from pydantic import BaseModel
+from fastapi import FastAPI
+from app.api.routes import router as api_router
 
-class UserInfo(BaseModel):
-    name: str
-    email: str
-    age: int
-    bmi: float
-    height: float
-    weight: float
-    diabetes: bool
-    overweight: bool
-    heart_disease: bool
-    family_history: str
-    smoking: bool
-    alcohol: bool
-
-class UserRequest(BaseModel):
-    user_id: int
-    user_info: UserInfo
-    question: str
-
+app = FastAPI()
+app.include_router(api_router)
