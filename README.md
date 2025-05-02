@@ -18,7 +18,7 @@ FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama
 - [x] Basic FastAPI setup
 - [x] Dummy LLM integration
 - [ ] LLM integration
-- [ ] MongoDB logging
+- [x] MongoDB logging
 - [ ] Docker containerization
 - [ ] CI setup (GitHub Actions)
 
