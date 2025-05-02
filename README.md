@@ -16,14 +16,12 @@ FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama
 ## Development Status
 - [x] Project initialized
 - [x] Basic FastAPI setup
+- [x] Dummy LLM integration
 - [ ] LLM integration
 - [ ] MongoDB logging
 - [ ] Docker containerization
 - [ ] CI setup (GitHub Actions)
 
 ## Planned Features
-- /predict endpoint
-- /history/{user_id} endpoint
-- Prompt tuning module
 - Logging to MongoDB
 - React FrontEnd
