@@ -5,3 +5,4 @@ pymango
 torch --index-url https://download.pytorch.org/whl/cu118
 transformers
 accelerate
+dotenv
