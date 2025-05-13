@@ -20,10 +20,7 @@ Known challenges of LLMs include:
 - Creating a response from non-authoritative sources.
 - Creating inaccurate responses due to terminology confusion, wherein different training sources use the same terminology to talk about different things.
 
-
-
-
-
+These are very dangerous issues for a health agent to have so opting for RAG/(Any other solution) to eliminate is necessary!
 
 
 ## Tech Stack

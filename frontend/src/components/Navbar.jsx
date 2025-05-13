@@ -1,10 +1,13 @@
 import React from 'react';
 import { useState } from 'react';   
+import styles from './Navbar.module.css';
+//import styles from '../App.css';
+//import styles from '../index.css';
 
 function Navbar() {
-    return (<nav className = "navbar">
+    return (<nav className = {styles['navbar']}>
 
-        <a href="/" className = "site-title">Health Recommender</a>
+        <a href="/" className = {styles['site-title']}>Nutrition Recommender</a>
         <ul>
             <li> <a href="/about">About</a> </li>
             <li> <a href="/ask">Ask a question!</a> </li>
