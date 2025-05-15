@@ -8,6 +8,10 @@ html, body {
   font-family: 'Rubik', sans-serif; 
 }
 
+.app-content {
+  padding-top: 60px;  /* make space for the fixed nav */
+}
+
 .hero {
   display: flex; 
   align-items: center;
