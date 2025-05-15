@@ -11,8 +11,7 @@ function Navbar() {
         <ul>
             <li> <a href="/about">About</a> </li>
             <li> <a href="/ask">Ask a question!</a> </li>
-            <li> <a href="/login">Login</a> </li>
-            <li> <a href="/signup">Sign Up</a> </li>
+            <li> <a href="/history">Get History</a> </li>
             
         </ul>
         
