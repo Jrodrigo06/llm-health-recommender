@@ -7,7 +7,7 @@ function HomePage() {
     function Hero() {
         return (
           <section className="hero">
-            <h1>Nutrition Recommender using TinyLlama</h1>
+            <h1 className="heroText"> Nutrition Recommender using TinyLlama</h1>
           </section>
         );
       }
