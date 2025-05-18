@@ -2,6 +2,10 @@ from fastapi import APIRouter
 from app.models.schema import UserRequest
 from app.services.llm_service import get_response_from_llm, format_prompt
 from app.services.mongo_service import log_prediction, get_user_history
+from pydantic import BaseModel
+from typing import list
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 
 router = APIRouter()
