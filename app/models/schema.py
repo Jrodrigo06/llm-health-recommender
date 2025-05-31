@@ -1,5 +1,9 @@
 from pydantic import BaseModel
 
+"""
+This model defines the schema for user information and requests.
+"""
+
 class UserInfo(BaseModel):
     name: str
     email: str

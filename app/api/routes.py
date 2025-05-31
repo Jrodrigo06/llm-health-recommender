@@ -7,6 +7,12 @@ from typing import list
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
+"""
+This module defines the API routes for the application, using FastAPI.
+It includes routes for the home page, prediction requests, 
+and user history retrieval.
+"""
+
 
 router = APIRouter()
 

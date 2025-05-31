@@ -2,6 +2,11 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from app.models.schema import UserInfo, UserRequest  # import your real models
 
+"""
+This module is the service layer for interacting with the LLM.
+It formats user information and questions into a prompt,
+and retrieves responses from the LLM by calling the model.
+"""
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
@@ -20,6 +25,8 @@ def format_prompt(user_info, question) -> str:
     prompt += f"{question}"
     return prompt
 
+
+## Function to call the LLM with the formatted prompt and return the response
 def get_response_from_llm(prompt) -> str:
 
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
@@ -35,7 +42,7 @@ def get_response_from_llm(prompt) -> str:
     generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return generated[len(prompt):].strip()  
 
-   
+## Example usage of the LLM service   
 if __name__ == "__main__":
     data = UserInfo(
                 name="John Doe",

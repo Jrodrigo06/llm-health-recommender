@@ -2,6 +2,10 @@ from pymongo import MongoClient
 from datetime import datetime
 from app.config import MONGO_URI, TESTING
 
+"""
+This module is responsible for interacting with the MongoDB database.
+It provides functions to log predictions and retrieve user history."""
+
 client = MongoClient(MONGO_URI)
 db = client["health_logs"]
 if TESTING != "1":
@@ -10,7 +14,7 @@ else:
     collection = db["user_predictions_test"]
 
 
-
+# This function logs the prediction response, user_id, and question to the database
 def log_prediction(response, user_id, question):
     if TESTING == "1":
         # Return to not messup user_predictions_test collection
@@ -25,6 +29,7 @@ def log_prediction(response, user_id, question):
 
     collection.insert_one(log_entry)
 
+# This function retrieves the history of predictions for a given user_id
 def get_user_history(user_id):
 
     
