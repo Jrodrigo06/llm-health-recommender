@@ -23,7 +23,7 @@ For a health recommendation system, these issues are dangerous, so using RAG hel
 
 
 ## Tech Stack
-FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama
+FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama · LangChain
 
 ## Development Status
 - [x] Project initialized
