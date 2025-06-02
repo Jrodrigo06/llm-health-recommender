@@ -12,15 +12,14 @@ A FastAPI-based backend that uses an LLM to generate personalized health recomme
 - Using RAG (Retrieval Augmented Generation) for Responses
 
 ## Why RAG
-First of all as AWS states in there article about RAG
 Known challenges of LLMs include:
 
-- Presenting false information when it does not have the answer.
-- Presenting out-of-date or generic information when the user expects a specific, current response.
+- Presenting false information when it is not the answer.
+- Presenting out-of-date or generic information when the user expects a specific response.
 - Creating a response from non-authoritative sources.
 - Creating inaccurate responses due to terminology confusion, wherein different training sources use the same terminology to talk about different things.
 
-These are very dangerous issues for a health agent to have so opting for RAG/(Any other solution) to eliminate is necessary!
+For a health recommendation system, these issues are dangerous, so using RAG helps to eliminate these issues
 
 
 ## Tech Stack
