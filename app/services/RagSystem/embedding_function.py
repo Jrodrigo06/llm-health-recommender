@@ -1,7 +1,8 @@
-from sentence_transformers import SentenceTransformer
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 # Function to return embedding function
 def get_embedding_function():
-    embeddings = SentenceTransformer('all-mpnet-base-v2')
+    embeddings = HuggingFaceEmbeddings(
+        model_name='all-mpnet-base-v2')
     return embeddings
