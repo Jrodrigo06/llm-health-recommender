@@ -32,10 +32,10 @@ FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama · LangCha
 - [x] LLM integration
 - [x] MongoDB logging
 - [ ] React Frontend
-- [ ] RAG integration
+- [X] RAG integration
 - [ ] Docker containerization
 - [ ] CI setup (GitHub Actions)
 
 ## Planned Features
 - CI/CD Pipelines
-- React FrontEnd
+- Finish React FrontEnd

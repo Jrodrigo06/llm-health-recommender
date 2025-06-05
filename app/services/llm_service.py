@@ -1,18 +1,27 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
-from app.models.schema import UserInfo, UserRequest  # import your real models
-
+from app.services.load_llm import load_model 
+from app.models.schema import UserInfo, UserRequest 
+from app.services.RagSystem.embedding_function import get_embedding_function
+from langchain_chroma import Chroma
+from langchain.schema import Document
+import os
 """
-This module is the service layer for interacting with the LLM.
-It formats user information and questions into a prompt,
+This formats user information and questions into a prompt,
 and retrieves responses from the LLM by calling the model.
 """
 
+CHROMA_PATH = os.path.abspath("data/chroma_db")
+
+tokenizer, model = load_model()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-tokenizer = AutoTokenizer.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
-model = AutoModelForCausalLM.from_pretrained("TinyLlama/TinyLlama-1.1B-Chat-v1.0")
 model.to(device)
-model.eval()
+
+def retrieve_relevant_chunks(question: str) -> list[Document]:
+    chroma = Chroma(
+        persist_directory=CHROMA_PATH,
+        embedding_function=get_embedding_function(),
+    )
+    return chroma.similarity_search(question, k=5)
 
 # Function to call to format the user_info and question into a prompt for the LLM
 def format_prompt(user_info, question) -> str:
