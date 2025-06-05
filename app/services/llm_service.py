@@ -25,10 +25,17 @@ def retrieve_relevant_chunks(question: str) -> list[Document]:
 
 # Function to call to format the user_info and question into a prompt for the LLM
 def format_prompt(user_info, question) -> str:
-    prompt = "You are a helpful health assistant. Answer the question based on the user profile below.\n\n"
+    prompt = "You are a helpful health assistant given relevant context from medical passages. Answer the question based on the user profile below.\n\n"
     prompt += f"Considering this User Information: "
     for key, value in user_info.items():
         prompt += f"{key}: {value}"
+
+    prompt += "\n\n with this context from medical passages: "
+    relevant_chunks = retrieve_relevant_chunks(question)
+    for idx, doc in enumerate(relevant_chunks, start=1):
+        snippet = doc.page_content.replace("\n", " ")[:400]
+        prompt += f"  Context {idx}: {snippet}…\n"
+    prompt += "\n"
     
     prompt += "Answer the following question for the user: "
     prompt += f"{question}"
@@ -71,7 +78,7 @@ if __name__ == "__main__":
     user_request = UserRequest(
         user_id=1,
         user_info=data,
-        question="Is my BMI normal?"
+        question="How can I lower?"
         )
 
     prompt = format_prompt(user_request.user_info.model_dump(), user_request.question)
