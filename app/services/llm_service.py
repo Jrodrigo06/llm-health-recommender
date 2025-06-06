@@ -16,6 +16,8 @@ tokenizer, model = load_model()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
+
+# Method to retrieve relevant chunks from the Chroma database based on the user's question
 def retrieve_relevant_chunks(question: str) -> list[Document]:
     chroma = Chroma(
         persist_directory=CHROMA_PATH,
@@ -37,26 +39,31 @@ def format_prompt(user_info, question) -> str:
         prompt += f"  Context {idx}: {snippet}…\n"
     prompt += "\n"
     
-    prompt += "Answer the following question for the user: "
-    prompt += f"{question}"
+    prompt += f"Question: {question}  \n\n"
+    prompt += "Please give one specific, actionable answer that uses the context above.\n"
     return prompt
 
 
 ## Function to call the LLM with the formatted prompt and return the response
 def get_response_from_llm(prompt) -> str:
 
+    print("Prompt sent to LLM:", prompt)  # Debugging line to check the prompt
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    prompt_length = inputs["input_ids"].shape[-1]
+    print("Prompt token count:", prompt_length)  # Debugging line to check the token count
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=200,   
+            max_new_tokens=150,   
             do_sample=True,      
             top_p=0.9,            
             temperature=0.7       
         )
     
     generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return generated[len(prompt):].strip()  
+    print("Generated response:", generated)  # Debugging line to check the generated response
+    answer = generated[len(prompt):].strip()
+    return answer
 
 ## Example usage of the LLM service   
 if __name__ == "__main__":
@@ -78,7 +85,7 @@ if __name__ == "__main__":
     user_request = UserRequest(
         user_id=1,
         user_info=data,
-        question="How can I lower?"
+        question="How can I lower my blood sugar?"
         )
 
     prompt = format_prompt(user_request.user_info.model_dump(), user_request.question)
