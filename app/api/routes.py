@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, FastAPI
 from app.models.schema import UserRequest
 from app.services.llm_service import get_response_from_llm, format_prompt
 from app.services.mongo_service import log_prediction, get_user_history
@@ -13,6 +13,19 @@ It includes routes for the home page, prediction requests,
 and user history retrieval.
 """
 
+orgins = [
+    "http://localhost:3000",
+]
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=orgins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 router = APIRouter()
 
