@@ -5,6 +5,7 @@ import os
 
 CHROMA_PATH = "data/chroma_db"
 
+#Function to add new chunks to the Chroma database
 def add_to_chroma(chunks: list[Document]):
     new_chunks, new_chunks_ids = get_new_chunks(chunks)
 
@@ -16,7 +17,7 @@ def add_to_chroma(chunks: list[Document]):
 
 
 
-
+# Function to get new chunks with unique IDs based on source and page
 def get_new_chunks(chunks: list[Document]) -> tuple[list[Document], list[str]]:
     last_page_id = None
     chunk_index = 0

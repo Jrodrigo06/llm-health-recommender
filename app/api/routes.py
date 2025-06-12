@@ -13,7 +13,7 @@ It includes routes for the home page, prediction requests,
 and user history retrieval.
 """
 
-orgins = [
+origins = [
     "http://localhost:3000",
 ]
 
@@ -21,12 +21,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=orgins,
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 router = APIRouter()
 
 # Home route
@@ -52,3 +51,10 @@ async def predict(data: UserRequest):
 async def get_history(user_id: int):
     print("Fetching history for user_id:", user_id)
     return {"history": get_user_history(user_id)}
+
+
+# Include the router in the FastAPI app
+app.include_router(router)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
