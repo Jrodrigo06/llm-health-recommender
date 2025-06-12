@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { TextInput } from '../components/TextInput';
+import { TextArea } from '../components/TextArea';
+import { RadioGroup } from '../components/RadioGroup';
 import api from '../api';
 
 export default function UserRequestForm() {
@@ -18,6 +21,14 @@ export default function UserRequestForm() {
     alcohol: '',
     question: ''
   });
+
+    const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
 
   const handleSubmit = async (e) => {
@@ -52,121 +63,74 @@ export default function UserRequestForm() {
     }
   };
 
+  
+const textFields = [
+  { id: 'user_id', label: 'User Id', type: 'number', placeholder: '123' },
+  { id: 'name',  label: 'Name', type: 'text', placeholder: 'Jane Doe' },
+  { id: 'email', type: 'email', placeholder: 'jane@example.com' },
+  { id: 'age', label: 'Age', type: 'number', placeholder: '30' },
+  { id: 'bmi', label: 'BMI', type: 'number', placeholder: '22.5' },
+  { id: 'height', label: 'Height', type: 'number', placeholder: '170' },
+  { id: 'weight', label: 'Weight', type: 'number', placeholder: '65' },
+];
+
+const textAreas = [
+  { id: 'family_history', label:'Provide any family history', rows: 3, placeholder: 'E.g. heart disease in father' },
+  { id: 'question', label: 'Question', rows: 4, placeholder: 'Your question…' },
+];
+
+const booleanFields = [
+  { id: 'diabetes', label: 'Do you have diabetes?' },
+  { id: 'overweight', label: 'Are you overweight?' },
+  { id: 'heart_disease', label: 'History of heart disease?' },
+  { id: 'smoking', label: 'Do you smoke?' },
+  { id: 'alcohol', label: 'Do you consume alcohol?' },
+];
+
   return (
-    <div className="mt-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-md shadow-red-500/50">
-    <h2 className="text-2xl font-bold text-gray-100 mb-6">Get a Reccomendation!</h2>
+    <div className="mt-8 mb-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-md shadow-red-500/50">
+    <h2 className="text-2xl font-bold text-gray-100 mb-6">Get a Recommendation!</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex flex-col">
-          <label htmlFor="user_id" className="mb-1 text-sm font-medium text-gray-100">
-            User ID
-          </label>
-          <input
-            type="number"
-            id="user_id"
-            name="user_id"
-            value={formData.user_id}
-            required
-            className="border border-gray-300 rounded px-3 py-2 bg-gray-50"
-          />
-        </div>
-
-        {/* Name, Email */}
-        <div className="flex flex-col">
-          <label htmlFor="name" className="mb-1 text-sm font-medium text-gray-100">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            required
-            className="border border-gray-300 rounded px-3 py-2 bg-gray-50"
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="email" className="mb-1 text-sm font-medium text-gray-100">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            required
-            className="border border-gray-300 rounded px-3 py-2 bg-gray-50"
-          />
-        </div>
-
-        {/* Numeric fields */}
-        {['age','bmi','height','weight'].map((field) => (
-          <div key={field} className="flex flex-col">
-            <label htmlFor={field} className="mb-1 text-sm font-medium text-gray-100">
-              {field.charAt(0).toUpperCase() + field.slice(1)}
-            </label>
-            <input
-              type="number"
-              step={field==='age'? '1' : 'any'}
-              id={field}
-              name={field}
-              value={formData[field]}
-              required
-              className="border border-gray-300 rounded px-3 py-2 bg-gray-50"
+         {textFields.map(f => (
+            <TextInput
+            key={f.id}
+            id={f.id}
+            name={f.id}
+            label = {f.label}
+            type={f.type}
+            placeholder={f.placeholder}
+            value={formData[f.id]}
+            onChange={handleChange}
             />
-          </div>
         ))}
 
-        {/* Boolean fields as groups */}
-        {[
-          { name: 'diabetes', label: 'Do you have diabetes?' },
-          { name: 'overweight', label: 'Are you overweight?' },
-          { name: 'heart_disease', label: 'History of heart disease?' },
-          { name: 'smoking', label: 'Do you smoke?' },
-          { name: 'alcohol', label: 'Do you consume alcohol?' },
-        ].map(({ name, label }) => (
-          <fieldset key={name} className="flex flex-col">
-            <legend className="mb-1 text-sm font-medium text-gray-100">{label}</legend>
-            <div className="flex space-x-4">
-              {['true','false'].map((val) => (
-                <label key={val} className="inline-flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name={name}
-                    value={val}
-                    checked={formData[name] === val}
-                    required
-                    className="form-radio"
-                  />
-                  <span className="text-gray-100">{val === 'true' ? 'Yes' : 'No'}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
+         {textAreas.map(f => (
+            <TextArea
+            key={f.id}
+            id={f.id}
+            name={f.id}
+            label={f.label}
+            rows={f.rows}
+            placeholder={f.placeholder}
+            value={formData[f.id]}
+            onChange={handleChange}
+            />
         ))}
 
-        {/* Family history */}
-        <div className="flex flex-col">
-          <label htmlFor="family_history" className="mb-1 text-sm font-medium text-gray-100">
-            Family Medical History
-          </label>
-          <textarea
-            id="family_history"
-            name="family_history"
-            value={formData.family_history}
-            required
-            className="border border-gray-300 rounded px-3 py-2 bg-gray-50"
-            rows={3}
-          />
-        </div>
-
-        {/* Question */}
-        <div className="flex flex-col">
-          <label htmlFor="question" className="mb-1 text-sm font-medium text-gray-100">Your Question</label>
-          <textarea
-            id="question"
-            name="question"
-            value={formData.question}
-            required
-            className="border border-gray-300 rounded px-3 py-2 bg-gray-50"
-            rows={4}
-          />
-        </div>
+        {booleanFields.map(f => (
+            <RadioGroup
+            key={f.id}
+            id={f.id}
+            name={f.id}
+            value={formData[f.id]}
+            label = {f.label}
+            onChange={handleChange}
+            options={[
+                { value: 'true', label: 'Yes' },
+                { value: 'false', label: 'No' },
+            ]}
+            />
+        ))}
 
         <button
           type="submit"

@@ -1,7 +1,7 @@
 # LLM Health Recommender (WIP)
 
 ## Project Overview
-A FastAPI-based backend that uses an LLM to generate personalized health recommendations based on user biomarker and lifestyle data.
+A FastAPI-based backend that uses an LLM to generate personalized health recommendations with a rag system to get context from a vector database created from health documents and answers the question based on user biomarker and lifestyle data.
 
 ## System Design
 - FastAPI for backend
@@ -11,7 +11,7 @@ A FastAPI-based backend that uses an LLM to generate personalized health recomme
 - Using Pydantic for Data Validation and for typechecking
 - Using RAG (Retrieval Augmented Generation) for Responses
 
-## Why RAG
+## Why I chose to use a RAG system
 Known challenges of LLMs include:
 
 - Presenting false information when it is not the answer.
