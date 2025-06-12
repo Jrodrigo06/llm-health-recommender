@@ -54,9 +54,9 @@ export default function UserRequestForm() {
     };
 
     try {
-     /**
-      * Call to the backend API to submit the form data
-      */
+     const response = await api.post('/predict', payload)
+     console.log('Response:', response.data);
+     alert('Recommendation submitted successfully!');
     } catch (err) {
       console.error(err);
      
