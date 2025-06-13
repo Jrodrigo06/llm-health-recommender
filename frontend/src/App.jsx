@@ -7,6 +7,8 @@ import GetHistory  from './pages/GetHistoryPage.jsx';
 import Prompting   from './pages/PromptingPage.jsx';
 import NotFound    from './pages/NotFoundPage.jsx';
 import Login_SignUpPage from './pages/Login_SignUpPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
+
 import './App.css';
 
 const router = createBrowserRouter([
@@ -16,6 +18,7 @@ const router = createBrowserRouter([
   { path: '*',      element: <NotFound />    },
   {path: '/history', element: <GetHistory />},
   {path: '/login', element: <Login_SignUpPage />},
+  {path: '/signup', element: <SignUpPage />},
 ]);
 
 export default function App() {
