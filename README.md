@@ -3,6 +3,13 @@
 ## Project Overview
 A FastAPI-based backend that uses an LLM to generate personalized health recommendations with a rag system to get context from a vector database created from health documents and answers the question based on user biomarker and lifestyle data.
 
+# Current Progress
+- Working on refactoring code
+    - Adjusting MongoDB for UserLogin
+        - Code to throw errors for incorrect login creds and for no existent user_ids
+    - Making user login page where the user also puts in info and thats stored in the db
+    - Using JWT for stateless authenication
+
 ## System Design
 - FastAPI for backend
 - LLM handles prompt-based recommendations
@@ -10,6 +17,7 @@ A FastAPI-based backend that uses an LLM to generate personalized health recomme
 - Docker & GitHub Actions for environment and automation
 - Using Pydantic for Data Validation and for typechecking
 - Using RAG (Retrieval Augmented Generation) for Responses
+
 
 ## Why I chose to use a RAG system
 Known challenges of LLMs include:

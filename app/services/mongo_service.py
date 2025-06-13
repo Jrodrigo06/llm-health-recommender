@@ -28,6 +28,17 @@ def create_user(user_id : int, password : str, user_info : UserInfo):
         "user_info": user_info.model_dump(),
         "created_at": datetime.now()
     }
+    users_collection.insert_one(log_user)
+
+# Login function to verify user credentials
+def login_user(user_id: int, password: str) -> bool:
+    if(user_exists(user_id) == False):
+        raise ValueError(f"User with user_id {user_id} does not exist.")
+    user = users_collection.find_one({"user_id": user_id, "password": password})
+    if user != None:
+        return True
+    else:
+        return False
     
 
 
