@@ -20,6 +20,5 @@ class UserInfo(BaseModel):
 
 class UserRequest(BaseModel):
     user_id: int
-    user_info: UserInfo
     question: str
 

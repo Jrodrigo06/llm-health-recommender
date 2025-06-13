@@ -12,6 +12,7 @@ function Navbar() {
             <li> <a href="/about">About</a> </li>
             <li> <a href="/ask">Ask a question!</a> </li>
             <li> <a href="/history">Get History</a> </li>
+            <li> <a href="/login">Login / Sign Up</a> </li>
             
         </ul>
         

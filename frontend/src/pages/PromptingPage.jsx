@@ -88,7 +88,7 @@ const booleanFields = [
 ];
 
   return (
-    <div className="mt-8 mb-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-md shadow-red-500/50">
+    <div className="mt-8 mb-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_20px_0_rgba(255,0,0,0.5)]">
     <h2 className="text-2xl font-bold text-gray-100 mb-6">Get a Recommendation!</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
          {textFields.map(f => (

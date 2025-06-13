@@ -40,6 +40,15 @@ def login_user(user_id: int, password: str) -> bool:
     else:
         return False
     
+# Get user information based on user_id
+def get_user_info(user_id: int) -> UserInfo:
+    if not user_exists(user_id):
+        raise ValueError(f"User with user_id {user_id} does not exist.")
+    
+    user = users_collection.find_one({"user_id": user_id})
+    user_info = UserInfo(**user["user_info"])
+    return user_info
+    
 
 
 # This function logs the prediction response, user_id, and question to the database

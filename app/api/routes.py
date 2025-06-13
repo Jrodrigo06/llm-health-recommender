@@ -1,7 +1,7 @@
 from fastapi import APIRouter, FastAPI
 from app.models.schema import UserRequest
 from app.services.llm_service import get_response_from_llm, format_prompt
-from app.services.mongo_service import log_prediction, get_user_history
+from app.services.mongo_service import log_prediction, get_user_history, get_user_info
 from pydantic import BaseModel
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,7 +21,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[origins],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -35,14 +35,14 @@ async def root():
 
 #predict route to handle user requests
 @router.post("/predict")
-async def predict(data: UserRequest):
+async def predict(userRequest: UserRequest):
     #Response returned from the LLM
     ## Calls the LLM with the formatted prompt and user information
     response = {"recommendation":
-        get_response_from_llm(format_prompt(data.user_info.model_dump(), data.question))}
+        get_response_from_llm(format_prompt(get_user_info(userRequest.user_id).model_dump(), userRequest.question))}
     
     ##Logs the prediction with user_id and question to the database
-    log_prediction(response, data.user_id, data.question)
+    log_prediction(response, userRequest.user_id, userRequest.question)
 
     return response
 
