@@ -35,7 +35,7 @@ export default function LoginPage() {
             <form>
                 <div className="mb-8">
                     <label htmlFor="username" className="block text-gray-300 mb-2">User Id</label>
-                    <input type="text" id="user_ud" name="user_id" onChange={(e) => setUserId(e.target.value)} className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your user id" />
+                    <input type="text" id="user_ud" name="user_id" onChange={(e) => setUserId(e.target.value)} className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your user ID" />
                 </div>
                 <div className="mb-8">
                     <label htmlFor="password" className="block text-gray-300 mb-2">Password</label>
