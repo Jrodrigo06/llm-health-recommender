@@ -7,3 +7,6 @@ transformers
 accelerate
 dotenv
 uvicorn
+langchain_huggingface
+langchain_chroma
+langchain

@@ -1,13 +1,13 @@
 from pymongo import MongoClient
 from datetime import datetime
-from app.config import MONGO_URI
+from app.config import MONGO_URL
 from app.models.schema import UserInfo
 
 """
 This module is responsible for interacting with the MongoDB database.
 It provides functions to log predictions and retrieve user history."""
 
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URL)
 db = client["health_logs"]
 user_logs_collection = db["user_predictions"]
 users_collection = db["users"]
