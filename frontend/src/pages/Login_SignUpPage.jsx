@@ -41,7 +41,7 @@ export default function LoginPage() {
                     <label htmlFor="password" className="block text-gray-300 mb-2">Password</label>
                     <input type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)} className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your password" />
                 </div>
-                <button type="submit" onSubmit={handleLogin} className="w-full bg-red-600 hover:bg-red-800 transition-colors duration-200 text-white font-bold py-2 px-4 rounded">
+                <button type="submit" onSubmit={handleLogin} className="w-full bg-red-600 hover:bg-red-800 transition-colors duration-200 text-white font-bold py-2 px-4 rounded cursor-pointer">
                     Login
                     </button>
                 <p className="mt-4 text-gray-400 text-sm">Don't have an account? <Link to="/signup" className="text-red-500 hover:underline">Sign Up</Link></p>

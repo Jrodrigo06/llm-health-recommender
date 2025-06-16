@@ -2,9 +2,12 @@ import { RadioGroup } from "../components/RadioGroup";
 import { TextInput } from "../components/TextInput";
 import { TextArea } from "../components/TextArea";
 import { useState } from "react";
+import { Loading } from "../components/Loading";
 import api from '../api'
 
 export default function SignUpPage() {
+  
+    const [isLoading, setIsLoading] = useState(false);
 
      const [formData, setFormData] = useState({
         user_id: '',
@@ -56,6 +59,7 @@ export default function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const payload = {
       user_id: Number(formData.user_id),
@@ -79,13 +83,16 @@ export default function SignUpPage() {
     try {
      await api.post('/create_user', payload)
      alert('Signed up successfully!');
+     setIsLoading(false);
     } catch (err) {
+      alert(err);
       console.error(err);
      
     }
   };
 
     return (
+    <div> 
     <div className="mt-8 mb-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_20px_0_rgba(255,0,0,0.5)]">
         <h2 className="text-2xl font-bold text-gray-100 mb-6">Sign Up</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -132,11 +139,17 @@ export default function SignUpPage() {
     
             <button
               type="submit"
-              className="w-full py-2 mt-4 font-semibold text-white bg-red-500 rounded hover:bg-red-600 transition-colors duration-200"
+              className="w-full py-2 mt-4 font-semibold text-white bg-red-500 rounded hover:bg-red-600
+               transition-colors duration-200 cursor-pointer"
             >
               Sign Up!
             </button>
           </form>
+        </div>
+
+        {isLoading && (
+          <Loading />
+        )}
         </div>
       );
 
