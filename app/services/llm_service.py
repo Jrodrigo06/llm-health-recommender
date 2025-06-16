@@ -13,8 +13,7 @@ and retrieves responses from the LLM by calling the model.
 CHROMA_PATH = os.path.abspath("data/chroma_db")
 
 tokenizer, model = load_model()
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
+
 
 
 # Method to retrieve relevant chunks from the Chroma database based on the user's question

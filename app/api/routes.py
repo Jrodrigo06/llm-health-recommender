@@ -1,5 +1,5 @@
 from fastapi import APIRouter, FastAPI, HTTPException
-from app.models.schema import UserRequest
+from app.models.schema import UserRequest, UserSignUp
 from app.services.llm_service import get_response_from_llm, format_prompt
 from app.services.mongo_service import log_prediction, get_user_history, get_user_info, create_user, login_user
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,13 +14,14 @@ and user history retrieval.
 
 origins = [
     "http://localhost:3000",
+    "http://localhost:5173",
 ]
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origins],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,11 +35,11 @@ async def root():
 
 # Post route to handle user creation
 @router.post("/create_user")
-async def make_user(payload: dict):
+async def make_user(payload: UserSignUp):
 
-    user_id = payload.get("user_id")
-    password = payload.get("password")
-    user_info = payload.get("user_info")
+    user_id = payload.user_id
+    password = payload.password
+    user_info = payload.user_info
 
     hashed_password = hash_password(password)
     

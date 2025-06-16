@@ -59,7 +59,7 @@ export default function SignUpPage() {
 
     const payload = {
       user_id: Number(formData.user_id),
-      user_password: formData.password,
+      password: formData.password,
       user_info: {
         name: formData.name,
         email: formData.email,

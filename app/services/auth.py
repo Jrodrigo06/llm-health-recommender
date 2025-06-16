@@ -16,9 +16,10 @@ SECRET_KEY = "Jeromes_key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
-def create_access_token(data: dict, expires_delta: timedelta = None):
+# Method to create access token for 60 minutes
+def create_access_token(data: dict):
     to_encode = data.copy()
-    expire = datetime.now() + (expires_delta or timedelta(minutes=60))
+    expire = datetime.now() + (timedelta(minutes=60))
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
