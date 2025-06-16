@@ -2,8 +2,6 @@ from fastapi import APIRouter, FastAPI, HTTPException
 from app.models.schema import UserRequest
 from app.services.llm_service import get_response_from_llm, format_prompt
 from app.services.mongo_service import log_prediction, get_user_history, get_user_info, create_user, login_user
-from pydantic import BaseModel
-from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from app.services.auth import hash_password, create_access_token
 import uvicorn
@@ -35,7 +33,7 @@ async def root():
     return {"message": "HomePage"}
 
 # Post route to handle user creation
-@router.post("/make_user")
+@router.post("/create_user")
 async def make_user(payload: dict):
 
     user_id = payload.get("user_id")

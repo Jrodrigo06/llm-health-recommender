@@ -2,6 +2,7 @@ import { RadioGroup } from "../components/RadioGroup";
 import { TextInput } from "../components/TextInput";
 import { TextArea } from "../components/TextArea";
 import { useState } from "react";
+import api from '../api'
 
 export default function SignUpPage() {
 
@@ -76,8 +77,7 @@ export default function SignUpPage() {
     };
 
     try {
-     const response = await api.post('/create_user', payload)
-     console.log('Response:', response.data);
+     await api.post('/create_user', payload)
      alert('Signed up successfully!');
     } catch (err) {
       console.error(err);

@@ -1,18 +1,24 @@
 import { Link } from "react-router-dom"
 import api from '../api'
+import { useState } from 'react';
 
 export default function LoginPage() {
+
+    // Variables and setters for userId and pass word
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         const payload = {
-            user_id : arguments,
-            password : arguments
+            user_id : userId,
+            password : password
         }
 
         try {
-            await api.post('/login', payload)
+            const response = await api.post('/login', payload)
+            localStorage.setItem("token", response.data.access_token);
             alert('Login Sucessful')
         }
         
@@ -29,11 +35,11 @@ export default function LoginPage() {
             <form>
                 <div className="mb-8">
                     <label htmlFor="username" className="block text-gray-300 mb-2">User Id</label>
-                    <input type="text" id="user_ud" name="user_id" className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your user id" />
+                    <input type="text" id="user_ud" name="user_id" onChange={(e) => setUserId(e.target.value)} className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your user id" />
                 </div>
                 <div className="mb-8">
                     <label htmlFor="password" className="block text-gray-300 mb-2">Password</label>
-                    <input type="password" id="password" name="password" className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your password" />
+                    <input type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)} className="w-full p-2 rounded bg-gray-950 text-gray-100" placeholder="Enter your password" />
                 </div>
                 <button type="submit" onSubmit={handleLogin} className="w-full bg-red-600 hover:bg-red-800 transition-colors duration-200 text-white font-bold py-2 px-4 rounded">
                     Login

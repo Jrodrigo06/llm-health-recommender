@@ -4,9 +4,9 @@ import { TextArea } from '../components/TextArea';
 import { RadioGroup } from '../components/RadioGroup';
 import api from '../api';
 
+
 export default function UserRequestForm() {
   const [formData, setFormData] = useState({
-    user_id: '',
     name: '',
     email: '',
     age: '',
