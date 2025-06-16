@@ -1,10 +1,11 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter, FastAPI, HTTPException
 from app.models.schema import UserRequest
 from app.services.llm_service import get_response_from_llm, format_prompt
-from app.services.mongo_service import log_prediction, get_user_history, get_user_info
+from app.services.mongo_service import log_prediction, get_user_history, get_user_info, create_user, login_user
 from pydantic import BaseModel
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
+from app.services.auth import hash_password, create_access_token
 import uvicorn
 
 """
@@ -32,6 +33,32 @@ router = APIRouter()
 @router.get("/")
 async def root():
     return {"message": "HomePage"}
+
+# Post route to handle user creation
+@router.post("/make_user")
+async def make_user(payload: dict):
+
+    user_id = payload.get("user_id")
+    password = payload.get("password")
+    user_info = payload.get("user_info")
+
+    hashed_password = hash_password(password)
+    
+    create_user(user_id, hashed_password, user_info)
+
+    return {"message": "User created successfully"}
+
+# Login route to handle user authentication
+@router.post("/login")
+async def login(payload: dict):
+    user_id = payload.get("user_id")
+    password = payload.get("password")
+    try:
+        login_user(user_id, password)
+        token = create_access_token({"user_id": user_id})       
+        return {"access_token": token, "token_type": "bearer"}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 #predict route to handle user requests
 @router.post("/predict")
