@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from datetime import datetime
 from app.config import MONGO_URL
 from app.models.schema import UserInfo
+from app.services.auth import verify_password
 
 """
 This module is responsible for interacting with the MongoDB database.
@@ -34,8 +35,9 @@ def create_user(user_id : int, password : str, user_info : UserInfo):
 def login_user(user_id: int, password: str) -> bool:
     if(user_exists(user_id) == False):
         raise ValueError(f"User with user_id {user_id} does not exist.")
-    user = users_collection.find_one({"user_id": user_id, "password": password})
-    if user != None:
+    user = users_collection.find_one({"user_id": user_id})
+    hashed_pass = user.get("password")
+    if verify_password(password ,hashed_pass):
         return True
     else:
         return False

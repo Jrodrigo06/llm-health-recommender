@@ -1,6 +1,8 @@
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
+from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -15,6 +17,8 @@ def verify_password(plain_password: str, hashed_password: str):
 SECRET_KEY = "Jeromes_key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/login")
+
 
 # Method to create access token for 60 minutes
 def create_access_token(data: dict):
@@ -23,5 +27,15 @@ def create_access_token(data: dict):
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
+# Decodes token
 def decode_access_token(token: str):
     return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+# Method to get current user
+def get_current_user(token: str = Depends(oauth2_scheme)) -> int:
+    actual_token = decode_access_token(token)
+    user_id = actual_token.get("user_id")
+    if(user_id):
+        return user_id
+    else:
+        raise HTTPException("Error in verifying token")

@@ -40,6 +40,9 @@ FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama · LangCha
 - [x] LLM integration
 - [x] MongoDB logging
 - [ ] React Frontend
+    - [ ] Mobile NavBar
+    - [ ] About Page
+    - [ ] Handling Authenication on frontend with local storage
 - [X] RAG integration
 - [ ] Docker containerization
 - [ ] CI setup (GitHub Actions)

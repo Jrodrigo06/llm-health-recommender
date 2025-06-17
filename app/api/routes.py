@@ -58,6 +58,8 @@ async def login(payload: dict):
         return {"access_token": token, "token_type": "bearer"}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+@router.post("/validate_token")
 
 #predict route to handle user requests
 @router.post("/predict")
