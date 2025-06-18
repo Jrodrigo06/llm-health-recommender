@@ -12,7 +12,13 @@ and retrieves responses from the LLM by calling the model.
 
 CHROMA_PATH = os.path.abspath("data/chroma_db")
 
+print("Loading model and tokenizer...")
 tokenizer, model = load_model()
+print("Model and tokenizer loaded successfully.")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+
+
 
 
 
@@ -47,9 +53,7 @@ def format_prompt(user_info, question) -> str:
 def get_response_from_llm(prompt) -> str:
 
     print("Prompt sent to LLM:", prompt)  # Debugging line to check the prompt
-    inputs = tokenizer(prompt, return_tensors="pt")
-    device = next(model.parameters()).device
-    inputs = {k: v.to(device) for k, v in inputs.items()}
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)  # Ensure inputs are on the same device as the model
     prompt_length = inputs["input_ids"].shape[-1]
     print("Prompt token count:", prompt_length)  # Debugging line to check the token count
     with torch.no_grad():

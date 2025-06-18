@@ -92,3 +92,6 @@ app.include_router(router, prefix="/api")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+elif __spec__ is not None and __spec__.name == "app.api.routes":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
