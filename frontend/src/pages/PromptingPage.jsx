@@ -1,13 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextArea } from '../components/TextArea';
 import api from '../api';
+import { Loading } from '../components/Loading';
 
 
 export default function UserRequestForm() {
   
 
   const [question, setQuestion] = useState('');
-  localStorage.getItem("token")
+  const [isLoading, setIsLoading] = useState(false);
+
+  // 1) On mount, check token validity
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        await api.get('/validate_token');
+      } catch {
+        localStorage.removeItem('token');
+        window.location.replace('/login');
+        alert('Your session has expired. Please log in.');
+      }
+    };
+    checkToken();
+  }, []);
 
 
 
@@ -15,18 +30,22 @@ export default function UserRequestForm() {
     e.preventDefault();
 
     const payload = {
-
       question: question
     };
 
     try {
-     const response = await api.post('/predict', payload)
+      console.log(payload)
+      setIsLoading(true);
+      const response = await api.post('/predict', payload)
      console.log('Response:', response.data);
      alert('Recommendation submitted successfully!');
     } catch (err) {
       console.error(err);
      
+    } finally {
+      setIsLoading(false);
     }
+
   };
 
   
@@ -38,6 +57,7 @@ const textAreas = [
 
 
   return (
+    <div> 
     <div className="mt-8 mb-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_20px_0_rgba(255,0,0,0.5)]">
     <h2 className="text-2xl font-bold text-gray-100 mb-6">Get a Recommendation!</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -60,6 +80,8 @@ const textAreas = [
           Submit
         </button>
       </form>
+    </div>
+    {isLoading && (<Loading />)}
     </div>
   );
 }

@@ -12,3 +12,4 @@ langchain_chroma
 langchain
 python-jose
 passlib
+setence-transformers

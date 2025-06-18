@@ -47,7 +47,9 @@ def format_prompt(user_info, question) -> str:
 def get_response_from_llm(prompt) -> str:
 
     print("Prompt sent to LLM:", prompt)  # Debugging line to check the prompt
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    inputs = tokenizer(prompt, return_tensors="pt")
+    device = next(model.parameters()).device
+    inputs = {k: v.to(device) for k, v in inputs.items()}
     prompt_length = inputs["input_ids"].shape[-1]
     print("Prompt token count:", prompt_length)  # Debugging line to check the token count
     with torch.no_grad():

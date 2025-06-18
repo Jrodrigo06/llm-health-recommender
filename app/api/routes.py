@@ -3,7 +3,8 @@ from app.models.schema import UserRequest, UserSignUp
 from app.services.llm_service import get_response_from_llm, format_prompt
 from app.services.mongo_service import log_prediction, get_user_history, get_user_info, create_user, login_user
 from fastapi.middleware.cors import CORSMiddleware
-from app.services.auth import hash_password, create_access_token
+from fastapi import Depends
+from app.services.auth import hash_password, create_access_token, get_current_user
 import uvicorn
 
 """
@@ -59,24 +60,29 @@ async def login(payload: dict):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@router.post("/validate_token")
+# Route to validate token
+@router.get("/validate_token")
+async def validate_token(user_id: int = Depends(get_current_user)):
+    return {"valid": True, "user_id": user_id}
+
 
 #predict route to handle user requests
 @router.post("/predict")
-async def predict(userRequest: UserRequest):
-    #Response returned from the LLM
-    ## Calls the LLM with the formatted prompt and user information
-    response = {"recommendation":
-        get_response_from_llm(format_prompt(get_user_info(userRequest.user_id).model_dump(), userRequest.question))}
-    
-    ##Logs the prediction with user_id and question to the database
-    log_prediction(response, userRequest.user_id, userRequest.question)
+async def predict(
+    userRequest: UserRequest,
+    user_id: int = Depends(get_current_user),
+):
+    profile = get_user_info(user_id)
+    prompt   = format_prompt(profile.model_dump(), userRequest.question)
+    answer   = get_response_from_llm(prompt)
 
-    return response
+    log_prediction({"recommendation": answer}, user_id, userRequest.question)
+
+    return {"recommendation": answer}
 
 # Route to get user history
 @router.get("/history/{user_id}")
-async def get_history(user_id: int):
+async def get_history(user_id: int = Depends(get_current_user)):
     print("Fetching history for user_id:", user_id)
     return {"history": get_user_history(user_id)}
 

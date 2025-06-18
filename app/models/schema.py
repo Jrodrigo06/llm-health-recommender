@@ -19,11 +19,8 @@ class UserInfo(BaseModel):
     alcohol: bool
 
 class UserRequest(BaseModel):
-    user_id: int
     question: str
     
 
 class UserSignUp(BaseModel):
-    user_id: int
-    password: str
     user_info: UserInfo
