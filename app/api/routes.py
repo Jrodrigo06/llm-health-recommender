@@ -81,7 +81,7 @@ async def predict(
     return {"recommendation": answer}
 
 # Route to get user history
-@router.get("/history/{user_id}")
+@router.get("/history")
 async def get_history(user_id: int = Depends(get_current_user)):
     print("Fetching history for user_id:", user_id)
     return {"history": get_user_history(user_id)}
