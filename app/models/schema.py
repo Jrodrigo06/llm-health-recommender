@@ -23,4 +23,6 @@ class UserRequest(BaseModel):
     
 
 class UserSignUp(BaseModel):
+    user_id: int
+    password: str
     user_info: UserInfo

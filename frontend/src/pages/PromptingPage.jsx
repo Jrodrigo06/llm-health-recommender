@@ -9,6 +9,7 @@ export default function UserRequestForm() {
 
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+    const [recommendation, setRecommendation] = useState('');
 
   // 1) On mount, check token validity
   useEffect(() => {
@@ -37,8 +38,9 @@ export default function UserRequestForm() {
       console.log(payload)
       setIsLoading(true);
       const response = await api.post('/predict', payload)
-     console.log('Response:', response.data);
-     alert('Recommendation submitted successfully!');
+      setRecommendation(response.data.recommendation);
+      console.log(response.data.recommendation);
+      alert('Recommendation submitted successfully!');
     } catch (err) {
       console.error(err);
      
@@ -82,6 +84,15 @@ const textAreas = [
       </form>
     </div>
     {isLoading && (<Loading />)}
+
+    {recommendation !== '' && (
+      <div className="mt-8 mb-8 mx-auto max-w-md p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_20px_0_rgba(255,0,0,0.5)]"> 
+         <h2 className="text-2xl font-bold text-gray-100 mb-6">Recommendation</h2>
+         <p className="text-gray-200 whitespace-pre-line">
+              {recommendation}
+         </p>
+      </div>
+       )}      
     </div>
   );
 }

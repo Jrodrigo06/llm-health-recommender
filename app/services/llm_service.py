@@ -16,7 +16,7 @@ print("Loading model and tokenizer...")
 tokenizer, model = load_model()
 print("Model and tokenizer loaded successfully.")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.to(device)
+
 
 
 
@@ -35,7 +35,7 @@ def format_prompt(user_info, question) -> str:
     prompt = "You are a helpful health assistant given relevant context from medical passages. Answer the question based on the user profile below.\n\n"
     prompt += f"Considering this User Information: "
     for key, value in user_info.items():
-        prompt += f"{key}: {value}"
+        prompt += f"{key}: {value}, "
 
     prompt += "\n\n with this context from medical passages: "
     relevant_chunks = retrieve_relevant_chunks(question)
@@ -59,7 +59,7 @@ def get_response_from_llm(prompt) -> str:
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=150,   
+            max_new_tokens=200,   
             do_sample=True,      
             top_p=0.9,            
             temperature=0.7       
