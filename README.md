@@ -1,4 +1,4 @@
-# LLM Health Recommender (WIP)
+# LLM Health Recommender
 
 ## Project Overview
 A FastAPI-based backend that uses an LLM to generate personalized health recommendations with a rag system to get context from a vector database created from health documents and answers the question based on user biomarker and lifestyle data.
