@@ -33,7 +33,7 @@ def retrieve_relevant_chunks(question: str) -> list[Document]:
 # Function to call to format the user_info and question into a prompt for the LLM
 def format_prompt(user_info, question) -> str:
     prompt = "You are a helpful health assistant given relevant context from medical passages. Answer the question based on the user profile below.\n\n"
-    prompt += f"Considering this User Information: "
+    prompt += f"Considering this User Information (Height in inches and weight in lbs): "
     for key, value in user_info.items():
         prompt += f"{key}: {value}, "
 

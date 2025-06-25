@@ -9,7 +9,7 @@ export default function UserRequestForm() {
 
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-    const [recommendation, setRecommendation] = useState('');
+  const [recommendation, setRecommendation] = useState('');
 
   // 1) On mount, check token validity
   useEffect(() => {

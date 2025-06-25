@@ -33,8 +33,8 @@ export default function SignUpPage() {
         { id: 'email', type: 'email', placeholder: 'jane@example.com' },
         { id: 'age', label: 'Age', type: 'number', placeholder: '30' },
         { id: 'bmi', label: 'BMI', type: 'number', placeholder: '22.5' },
-        { id: 'height', label: 'Height', type: 'number', placeholder: '170' },
-        { id: 'weight', label: 'Weight', type: 'number', placeholder: '65' },
+        { id: 'height', label: 'Height (in.)', type: 'number', placeholder: '170' },
+        { id: 'weight', label: 'Weight (lbs)', type: 'number', placeholder: '65' },
         ];
 
     const textAreas = [
