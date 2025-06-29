@@ -7,7 +7,7 @@ html, body {
   flex-direction: column;
   height: 100%;
   margin: 0;
-  background-color: #141414;            
+  background-color: transparent;            
   color: #fff;                    
   font-family: 'Rubik', sans-serif; 
 }
