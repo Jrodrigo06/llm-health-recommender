@@ -3,12 +3,18 @@
 ## Project Overview
 A FastAPI-based backend that uses an LLM to generate personalized health recommendations with a rag system to get context from a vector database created from health documents and answers the question based on user biomarker and lifestyle data.
 
+
+
+https://github.com/user-attachments/assets/685bd844-66d4-4326-b1a8-b7bec61009e4
+
+
+
 # Current Progress
 - Working on refactoring code
     - Adjusting MongoDB for UserLogin
-        - Code to throw errors for incorrect login creds and for no existent user_ids
-    - Making user login page where the user also puts in info and thats stored in the db
-    - Using JWT for stateless authenication
+        - Code to throw errors for incorrect login credentials and non-existent user IDs
+    - Making a user login page where the user also puts in info, and that's stored in the db
+    - Using JWT for stateless authentication
 
 ## System Design
 - FastAPI for backend
@@ -41,7 +47,7 @@ FastAPI · Python · MongoDB · Docker · GitHub Actions · TinyLlama · LangCha
 - [x] MongoDB logging
 - [x] React Frontend
     - [x] About Page
-    - [x] Handling Authenication on frontend with local storage
+    - [x] Handling Authentication on frontend with local storage
 - [X] RAG integration
 - [ ] CI setup (GitHub Actions)
 
