@@ -2,7 +2,7 @@ export default function AboutPage() {
     return (
         <div> 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mt-8 mx-auto max-w-7xl">
-            <div className="mx-4 p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_10px_0_rgba(255,0,0,0.2)]"> 
+            <div className="w-full md:w-5/6 lg:w-4/5 mx-auto p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_10px_0_rgba(255,0,0,0.2)]"> 
                 <h2 className="text-2xl font-bold text-gray-100 mb-6">About this project</h2>
                 <h3 className="text-xl font-semibold text-gray-200 mb-4">Overview</h3>
                 <p className="text-gray-300 mb-5 leading-relaxed">
@@ -18,7 +18,7 @@ export default function AboutPage() {
                     The application is built with React for the frontend, FastAPI for the backend, ChromaDB for the vector database, Llama 2 for the llm, MongoDB for data storage.
                 </p>
             </div>
-            <div className="mx-4 p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_10px_0_rgba(255,0,0,0.2)]"> 
+            <div className="w-full md:w-5/6 lg:w-4/5 mx-auto p-8 rounded-lg bg-[#2C2C2C] shadow-[0_0_10px_0_rgba(255,0,0,0.2)]"> 
                 <h2 className="text-2xl font-bold text-gray-100 mb-6">Why I made this project</h2>
                 <p className="text-gray-300 mb-5 leading-relaxed">
                     I created this project to experiment with Retrieval-Augmented Generation (RAG). Health advice is an area where RAG effectively addresses the limitations of using LLMs alone, improving accuracy and relevance in the responses.

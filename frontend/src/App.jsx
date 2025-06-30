@@ -34,7 +34,7 @@ export default function App() {
       gyroControls: false,
       minHeight: 200.00,
       minWidth: 200.00,
-      scale: 1.00,
+      scale: 3.00,
       color1: 0x0,
       color2: 0x390303,
       size: 1.90,

@@ -15,7 +15,7 @@ CHROMA_PATH = os.path.abspath("data/chroma_db")
 print("Loading model and tokenizer...")
 tokenizer, model = load_model()
 print("Model and tokenizer loaded successfully.")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 
@@ -52,21 +52,21 @@ def format_prompt(user_info, question) -> str:
 ## Function to call the LLM with the formatted prompt and return the response
 def get_response_from_llm(prompt) -> str:
 
-    print("Prompt sent to LLM:", prompt)  # Debugging line to check the prompt
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)  # Ensure inputs are on the same device as the model
+    print("Prompt sent to LLM:", prompt) 
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
     prompt_length = inputs["input_ids"].shape[-1]
-    print("Prompt token count:", prompt_length)  # Debugging line to check the token count
+    print("Prompt token count:", prompt_length)  
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=200,   
+            max_new_tokens=400,   
             do_sample=True,      
             top_p=0.9,            
             temperature=0.7       
         )
     
     generated = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print("Generated response:", generated)  # Debugging line to check the generated response
+    print("Generated response:", generated)  
     answer = generated[len(prompt):].strip()
     return answer
 

@@ -5,18 +5,17 @@ MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
 
 def load_model():
 
-    print("[load_model] Loading tokenizer…", file=sys.stderr)
+    print("[load_model] Loading tokenizer…")
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
-    print("✔ [load_model] Tokenizer loaded", file=sys.stderr)
+    print("[load_model] Tokenizer loaded")
 
     system = platform.system()
     has_cuda = torch.cuda.is_available()
-    has_mps  = system=="Darwin" and torch.backends.mps.is_available()
-    print(f"[load_model] system={system}, cuda={has_cuda}, mps={has_mps}", file=sys.stderr)
-    print("[load_model] Loading model", file=sys.stderr)
+    print(f"[load_model] CUDA available: {has_cuda}")
+    print("[load_model] Loading model")
     model = AutoModelForCausalLM.from_pretrained(
             MODEL_NAME,
-            device_map="auto",
+            device_map="cuda",
             torch_dtype=torch.float16,
             low_cpu_mem_usage=True,
     )
