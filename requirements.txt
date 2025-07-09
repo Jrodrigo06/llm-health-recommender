@@ -1,0 +1,15 @@
+fastapi
+pydantic
+httpx
+pymongo
+torch --index-url https://download.pytorch.org/whl/cu118
+transformers
+accelerate
+dotenv
+uvicorn
+langchain_huggingface
+langchain_chroma
+langchain
+python-jose
+passlib
+sentence-transformers

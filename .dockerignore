@@ -1,0 +1,5 @@
+# ignore everything that isn't your backend source + requirements
+*
+!app/
+!requirements.txt
+!.dockerignore

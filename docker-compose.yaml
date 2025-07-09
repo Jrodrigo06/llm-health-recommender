@@ -1,0 +1,34 @@
+
+
+services:
+  db: 
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - health_recommender_db:/data/db
+    
+  api:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URL: mongodb://db:27017
+      TRANSFORMERS_CACHE: /cache
+      HUGGINGFACE_HUB_TOKEN: ${HUGGINGFACE_HUB_TOKEN}
+      HF_HOME: ${HF_HOME}
+    volumes:
+      - ./.cache/huggingface:/cache   
+      - ./data/chroma_db:/app/data/chroma_db
+    depends_on:
+      - db
+    gpus: all
+    env_file:
+      - .env                   
+
+volumes:
+  health_recommender_db:
+  

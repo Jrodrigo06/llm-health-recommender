@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+@import "tailwindcss";
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  background-color: transparent;            
+  color: #fff;                    
+  font-family: 'Rubik', sans-serif; 
+}
+
+
+
+.hero {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  height: 100vh;          
+  text-align: center;  
+  font-size: 3rem;   
+}
+
+.heroText {
+  color: #fff; 
+  transition: text-shadow 0.5s;
+}
+
+.heroText:hover {
+  text-shadow: 0 0 10px #950606, 0 0 20px #950606, 0 0 30px #950606;
+  
+}
+
