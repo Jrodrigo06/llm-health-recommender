@@ -3,12 +3,12 @@ __pycache__/
 *.pyc
 *.pyd
 *.so
+.env
 
 # Virtual environment
 venv/
 .venv/
 env/
-
 .env
 
 # Distribution / packaging
