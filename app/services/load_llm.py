@@ -1,12 +1,18 @@
 import torch, platform, traceback, sys
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from huggingface_hub import login, HfFolder
+import os
 
 MODEL_NAME = "meta-llama/Llama-2-7b-chat-hf"
 
 def load_model():
-
+    
+    token = os.environ["HUGGINGFACE_HUB_TOKEN"]
+    if not token:
+        raise ValueError("HUGGINGFACE_HUB_TOKEN environment variable is not set.")
+    login(token)  
     print("[load_model] Loading tokenizer…")
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True, local_files_only=True)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
     print("[load_model] Tokenizer loaded")
 
     system = platform.system()

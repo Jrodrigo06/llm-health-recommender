@@ -3,6 +3,7 @@ pydantic
 httpx
 pymongo
 torch --index-url https://download.pytorch.org/whl/cu118
+huggingface_hub
 transformers
 accelerate
 dotenv
@@ -13,3 +14,4 @@ langchain
 python-jose
 passlib
 sentence-transformers
+nltk

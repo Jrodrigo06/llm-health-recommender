@@ -25,15 +25,15 @@ def get_new_chunks(chunks: list[Document]) -> tuple[list[Document], list[str]]:
 
 
     for chunk in chunks:
-        source = chunk.metadata.get("source")
-        page = chunk.metadata.get("page")
+        source = chunk.metadata.get("source") #type: ignore
+        page = chunk.metadata.get("page") #type: ignore
         current_page_id = f"{source}:{page}"
         if current_page_id == last_page_id:
             chunk_index += 1
         else:
             chunk_index = 0
         unique_id = f"{current_page_id}:{chunk_index}"
-        chunk.metadata["id"] = unique_id
+        chunk.metadata["id"] = unique_id #type: ignore
         new_chunks_ids.append(unique_id)
         
         last_page_id = current_page_id

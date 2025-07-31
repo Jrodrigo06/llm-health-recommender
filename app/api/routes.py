@@ -2,10 +2,8 @@ from fastapi import APIRouter, FastAPI, HTTPException
 from app.models.schema import UserRequest, UserSignUp
 from app.services.llm_service import get_response_from_llm, format_prompt
 from app.services.mongo_service import log_prediction, get_user_history, get_user_info, create_user, login_user
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Depends
 from app.services.auth import hash_password, create_access_token, get_current_user
-import uvicorn
 
 """
 This module defines the API routes for the application, using FastAPI.
@@ -13,26 +11,14 @@ It includes routes for the home page, prediction requests,
 and user history retrieval.
 """
 
-origins = [
-    "http://localhost:3000",
-    "http://localhost:5173",
-]
+
 
 
 router = APIRouter()
 
-app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
-# Include the router in the FastAPI app
-app.include_router(router, prefix="/api")
+
 
 
 # Home route
@@ -96,6 +82,5 @@ async def get_history(user_id: int = Depends(get_current_user)):
 
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 
