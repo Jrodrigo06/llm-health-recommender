@@ -10,11 +10,8 @@ https://github.com/user-attachments/assets/685bd844-66d4-4326-b1a8-b7bec61009e4
 
 
 # Current Progress
-- Working on refactoring code
-    - Adjusting MongoDB for UserLogin
-        - Code to throw errors for incorrect login credentials and non-existent user IDs
-    - Making a user login page where the user also puts in info, and that's stored in the db
-    - Using JWT for stateless authentication
+- Done for now
+
 
 ## System Design
 - FastAPI for backend
@@ -22,6 +19,7 @@ https://github.com/user-attachments/assets/685bd844-66d4-4326-b1a8-b7bec61009e4
 - MongoDB stores user input and logs
 - Docker & GitHub Actions for environment and automation
 - Using Pydantic for Data Validation and for typechecking
+- Used Semantic Chunking to group relevant context together for better retrieval
 - Using RAG (Retrieval Augmented Generation) for Responses
 
 
