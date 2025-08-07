@@ -1,7 +1,7 @@
 # LLM Health Recommender
 
 ## Project Overview
-A webapp with FastAPI-based backend and React front end, that uses an LLM to generate personalized health recommendations with a rag system to get context from a vector database created from health documents and answers the question based on user biomarker and lifestyle data.
+A webapp with a FastAPI-based backend and a React front end, that uses an LLM to generate personalized health recommendations with a rag system to get context from a vector database created from health documents and answers the question based on user biomarker and lifestyle data.
 
 
 
